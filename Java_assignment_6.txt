@@ -1,0 +1,124 @@
+PART-A THEORY QUESTIONS
+1. What is the main method’s signature and why is it static?
+The main method signature in Java is public static void main(String[] args).
+Each keyword in this signature has a specific purpose. The public access modifier makes the method accessible from anywhere so that the JVM can call it. The void return type indicates that the method does not return any value to the JVM. The String[] args parameter is used to accept command-line arguments passed during program execution.
+The main method is declared static because the JVM needs to execute it without creating an object of the class. Since object creation happens after class loading, making main static allows the JVM to start program execution directly. If main were not static, the JVM would need to create an object first, which is not practical at the starting point of program execution.
+2. What are wrapper classes in Java?
+Wrapper classes in Java are used to convert primitive data types into objects. For each primitive type, Java provides a corresponding wrapper class, such as Integer for int, Double for double, Character for char, and Boolean for boolean. These classes are part of the java.lang package and allow primitive values to be treated as objects.
+Wrapper classes are useful because many Java features like Collections (ArrayList, HashMap) work only with objects and not with primitive data types. Java also supports autoboxing and unboxing, where primitives are automatically converted to wrapper objects and vice versa. Wrapper classes provide utility methods like parseInt() and valueOf() that help in data conversion and manipulation.
+3. Difference between equals() method and == operator
+The == operator is used to compare memory references, not actual content. When used with primitive data types, it compares values directly, but when used with objects, it checks whether both references point to the same object in memory. Therefore, even if two objects contain the same data, == may return false.
+The equals() method is used to compare the content of objects. In classes like String, equals() is overridden to compare the actual character values instead of memory addresses. This makes equals() more suitable for logical comparisons. Hence, == checks reference equality, while equals() checks value equality.
+4. What is the final keyword used for?
+The final keyword in Java is used to restrict modification and ensure data security. When a variable is declared as final, its value cannot be changed once initialized. This is commonly used to create constants. A final variable improves program reliability by preventing accidental changes.
+When a method is declared final, it cannot be overridden by subclasses. This is useful when we want to maintain a fixed implementation. If a class is declared final, it cannot be inherited, which helps in preventing unwanted extension and improves security. Thus, final is used for variables, methods, and classes to control inheritance and modification.
+5. Difference between final, finally, and finalize
+The final keyword is used to restrict changes in variables, methods, and classes. A final variable cannot be reassigned, a final method cannot be overridden, and a final class cannot be inherited. It is mainly used to maintain consistency and security in programs.
+The finally block is used in exception handling and always executes whether an exception occurs or not. It is mainly used to close resources like files and database connections. The finalize() method is called by the Garbage Collector before destroying an object to perform cleanup operations. While final is a keyword, finally is a block, and finalize() is a method.
+PART-B PRACTICAL QUESTIONS
+1. Count words in a sentence
+import java.util.Scanner;
+
+class WordCount {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String sentence = sc.nextLine();
+        String[] words = sentence.trim().split("\\s+");
+
+        System.out.println("Word count: " + words.length);
+    }
+}
+2. Find frequency of each character in a String
+import java.util.Scanner;
+
+class CharacterFrequency {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String str = sc.nextLine();
+        int[] freq = new int[256];
+
+        for (int i = 0; i < str.length(); i++) {
+            freq[str.charAt(i)]++;
+        }
+
+        for (int i = 0; i < 256; i++) {
+            if (freq[i] > 0) {
+                System.out.println((char) i + " : " + freq[i]);
+            }
+        }
+    }
+}
+3. Remove whitespace from a String
+import java.util.Scanner;
+
+class RemoveWhitespace {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String str = sc.nextLine();
+        String result = str.replaceAll("\\s", "");
+
+        System.out.println(result);
+    }
+}
+4. Remove duplicates from a String
+import java.util.Scanner;
+
+class RemoveDuplicates {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String str = sc.nextLine();
+        String result = "";
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (result.indexOf(ch) == -1) {
+                result = result + ch;
+            }
+        }
+
+        System.out.println(result);
+    }
+}
+5. Find first non-repeated character in a String
+import java.util.Scanner;
+
+class FirstNonRepeatedChar {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String str = sc.nextLine();
+        int[] freq = new int[256];
+
+        for (int i = 0; i < str.length(); i++) {
+            freq[str.charAt(i)]++;
+        }
+
+        for (int i = 0; i < str.length(); i++) {
+            if (freq[str.charAt(i)] == 1) {
+                System.out.println(str.charAt(i));
+                break;
+            }
+        }
+    }
+}
+6. Find substring in a String
+import java.util.Scanner;
+
+class FindSubstring {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String str = sc.nextLine();
+        String sub = sc.nextLine();
+
+        if (str.contains(sub)) {
+            System.out.println("Substring found");
+        } else {
+            System.out.println("Substring not found");
+        }
+    }
+}
